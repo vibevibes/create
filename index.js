@@ -11,10 +11,10 @@ const name = process.argv[2];
 
 if (!name) {
   console.log(`
-  Usage: npx create-vibevibes <name>
+  Usage: npx @vibevibes/create <name>
 
   Example:
-    npx create-vibevibes my-experience
+    npx @vibevibes/create my-experience
     cd my-experience
     npm install
     npx vibevibes-serve .
@@ -31,7 +31,7 @@ if (existsSync(dest)) {
 
 console.log(`\n  Creating vibevibes experience: ${name}\n`);
 
-// Copy template
+// Copy template (includes CLAUDE.md for smooth Claude handoff)
 const templateDir = join(__dirname, 'template');
 cpSync(templateDir, dest, { recursive: true });
 
@@ -57,7 +57,7 @@ writeFileSync(join(dest, '.mcp.json'), JSON.stringify(mcpConfig, null, 2) + '\n'
 try {
   execSync('git init', { cwd: dest, stdio: 'ignore' });
   execSync('git add .', { cwd: dest, stdio: 'ignore' });
-  execSync('git commit -m "Initial commit via create-vibevibes"', { cwd: dest, stdio: 'ignore' });
+  execSync('git commit -m "Initial commit via create-experience"', { cwd: dest, stdio: 'ignore' });
 } catch {}
 
 console.log(`  Done! Next steps:
@@ -65,6 +65,8 @@ console.log(`  Done! Next steps:
     cd ${name}
     npm install
     npx vibevibes-serve .
+
+  Open Claude in the project — it already knows the SDK.
 
   Docs:
     SDK:       https://github.com/vibevibes/sdk

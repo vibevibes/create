@@ -8,7 +8,7 @@ Scaffold a new [vibevibes](https://github.com/vibevibes/sdk) experience in secon
 ## Usage
 
 ```bash
-npm create @vibevibes my-experience
+npx @vibevibes/create my-experience
 cd my-experience
 npm install
 npx vibevibes-serve .
@@ -16,20 +16,20 @@ npx vibevibes-serve .
 
 Open http://localhost:4321 — you have a running experience with a starter canvas and tools.
 
+Open Claude in the project — it already knows the SDK (via CLAUDE.md).
+
 ## What You Get
 
 ```
 my-experience/
   src/index.tsx       <- Your experience (tools + canvas)
-  package.json        <- @vibevibes/sdk + TypeScript
+  CLAUDE.md           <- Full SDK reference for Claude
+  .mcp.json           <- Auto-registers MCP server with Claude
+  package.json
   tsconfig.json
 ```
 
 Edit `src/index.tsx`. The dev server hot-reloads on save. Humans use the browser. Agents connect via MCP. Same room, same tools.
-
-## What's vibevibes?
-
-Shared human-AI experiences. Define tools (with Zod schemas) and a React canvas. Agents connect via MCP. Humans connect via browser. Both mutate the same state through the same tools.
 
 ## Ecosystem
 
@@ -37,7 +37,7 @@ Shared human-AI experiences. Define tools (with Zod schemas) and a React canvas.
 |---------|-------------|
 | [@vibevibes/sdk](https://github.com/vibevibes/sdk) | Define experiences — tools, canvas, state |
 | [@vibevibes/mcp](https://github.com/vibevibes/mcp) | Runtime engine — MCP server + WebSocket + viewer |
-| **@vibevibes/create** | `npm create @vibevibes` — scaffold in seconds |
+| **@vibevibes/create** | `npx @vibevibes/create` — scaffold in seconds |
 | [experiences](https://github.com/vibevibes/experiences) | Example experiences — fork and remix |
 
 ## License

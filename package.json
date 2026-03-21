@@ -1,13 +1,13 @@
 {
   "name": "@vibevibes/create",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Scaffold a new vibevibes experience",
   "type": "module",
   "bin": {
-    "create-vibevibes": "./index.js"
+    "create-experience": "./index.js"
   },
   "files": ["index.js", "template"],
-  "keywords": ["vibevibes", "create", "scaffold", "experience", "mcp", "ai-native", "multiplayer"],
+  "keywords": ["vibevibes", "create", "scaffold", "experience", "mcp", "ai-native", "multiplayer", "human-ai"],
   "repository": {
     "type": "git",
     "url": "https://github.com/vibevibes/create"
