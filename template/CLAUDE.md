@@ -2,12 +2,15 @@
 
 You are working on a **vibevibes experience**: a shared interactive app where humans (in the browser) and AI agents (via MCP tools) collaborate in real-time through shared state.
 
-## Commands
+## Auto-Setup
 
-```bash
-npm install              # Install dependencies
-npx vibevibes-serve .    # Start dev server at http://localhost:4321
-```
+On your first interaction, before doing anything else:
+
+1. Check if `node_modules/` exists. If not, run `npm install`.
+2. Check if port 4321 is in use (`lsof -ti :4321`). If not, start the dev server: run `npx vibevibes-serve .` in the background.
+3. Tell the user the viewer is at http://localhost:4321.
+
+This ensures the experience is always ready to use and preview.
 
 ## How to Edit
 
