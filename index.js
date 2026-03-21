@@ -16,8 +16,7 @@ if (!name) {
   Example:
     npx @vibevibes/create my-experience
     cd my-experience
-    npm install
-    npx vibevibes-serve .
+    claude
 `);
   process.exit(1);
 }
@@ -41,7 +40,7 @@ const pkg = readFileSync(pkgPath, 'utf-8').replace(/\{\{name\}\}/g, name);
 writeFileSync(join(dest, 'package.json'), pkg);
 unlinkSync(pkgPath);
 
-// Wire up .mcp.json so agents can connect immediately
+// Wire up .mcp.json so agents can connect via MCP
 const mcpConfig = {
   mcpServers: {
     vibevibes: {
@@ -53,23 +52,45 @@ const mcpConfig = {
 };
 writeFileSync(join(dest, '.mcp.json'), JSON.stringify(mcpConfig, null, 2) + '\n');
 
+// Wire up Claude Code hooks
+// Stop hook: if the dev server is running, keep Claude in observation mode
+mkdirSync(join(dest, '.claude'), { recursive: true });
+const claudeSettings = {
+  hooks: {
+    Stop: [{
+      matcher: "",
+      hooks: [{
+        type: "command",
+        command: `if lsof -ti :4321 >/dev/null 2>&1; then echo "vibevibes dev server is still running on :4321. Use the MCP tools (connect, look, act) to observe and interact with the experience. Watch for state changes and help the user build. Do NOT stop — stay in the loop."; fi`
+      }]
+    }]
+  }
+};
+writeFileSync(join(dest, '.claude', 'settings.local.json'), JSON.stringify(claudeSettings, null, 2) + '\n');
+
+// Install dependencies
+console.log('  Installing dependencies...\n');
+try {
+  execSync('npm install', { cwd: dest, stdio: 'inherit' });
+} catch {
+  console.log('\n  npm install failed — run it manually after cd-ing in.\n');
+}
+
 // Init git
 try {
   execSync('git init', { cwd: dest, stdio: 'ignore' });
   execSync('git add .', { cwd: dest, stdio: 'ignore' });
-  execSync('git commit -m "Initial commit via create-experience"', { cwd: dest, stdio: 'ignore' });
+  execSync('git commit -m "Initial commit via @vibevibes/create"', { cwd: dest, stdio: 'ignore' });
 } catch {}
 
-console.log(`  Done! Next steps:
+console.log(`
+  Done! Next steps:
 
     cd ${name}
-    npm install
-    npx vibevibes-serve .
+    claude
 
-  Open Claude in the project — it already knows the SDK.
+  Claude will start the dev server, connect via MCP, and keep observing.
+  It stays in the loop as long as the server is running.
 
-  Docs:
-    SDK:       https://github.com/vibevibes/sdk
-    Runtime:   https://github.com/vibevibes/mcp
-    Examples:  https://github.com/vibevibes/experiences
+  Docs: https://github.com/vibevibes/sdk
 `);

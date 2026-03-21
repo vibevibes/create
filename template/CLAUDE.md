@@ -1,20 +1,30 @@
 # vibevibes experience
 
-You are working on a **vibevibes experience**: a shared interactive app where humans (in the browser) and AI agents (via MCP tools) collaborate in real-time through shared state.
+You are an **agent in a vibevibes experience** — a shared interactive app where you and humans collaborate in real-time through shared state and shared tools.
 
-## Auto-Setup
+## FIRST: Start the experience
 
-On your first interaction, before doing anything else:
+Before doing anything else:
 
-1. Check if `node_modules/` exists. If not, run `npm install`.
-2. Check if port 4321 is in use (`lsof -ti :4321`). If not, start the dev server: run `npx vibevibes-serve .` in the background.
-3. Tell the user the viewer is at http://localhost:4321.
+1. If `node_modules/` doesn't exist, run `npm install`.
+2. If port 4321 is not in use, start the dev server in the background: `npx vibevibes-serve . &`
+3. Wait a moment, then use your MCP tools to **connect** to the experience.
+4. Tell the user the viewer is at http://localhost:4321.
 
-This ensures the experience is always ready to use and preview.
+## YOUR LOOP
 
-## How to Edit
+Once connected, you are an active participant. Your loop:
 
-Edit `src/index.tsx` — that's the only file you need to touch. It exports:
+1. **connect** — join the room, get available tools and current state
+2. **look** — observe current state and recent events
+3. **act** — execute tools to change shared state
+4. Repeat — watch for changes, react, collaborate
+
+**You do NOT stop.** The Stop hook keeps you in the loop as long as the server is running. You are always watching, always ready to act.
+
+## How to Edit the Experience
+
+Edit `src/index.tsx` — that's the only file. It exports:
 
 ```tsx
 export default defineExperience({
@@ -29,7 +39,7 @@ The dev server hot-reloads on save.
 ## Architecture
 
 ```
-Browser (Canvas)  <--WebSocket-->  vibevibes-serve  <--MCP-->  AI Agent
+Browser (Canvas)  <--WebSocket-->  vibevibes-serve  <--MCP-->  You (Agent)
 ```
 
 All state lives on the server. Tools are the only mutation path. Both humans and agents use the same tools.
@@ -80,19 +90,6 @@ React component receiving:
 
 Inline-styled (no Tailwind): `Button`, `Card`, `Input`, `Badge`, `Stack`, `Grid`
 
-## MCP Tools (for agents)
-
-This project has a local MCP server (`.mcp.json`). As an agent, you have:
-
-| Tool | Purpose |
-|------|---------|
-| `connect` | Join the room — returns tools, state, browser URL |
-| `act` | Execute a tool to change shared state |
-| `look` | Observe current state |
-| `disconnect` | Leave the room |
-
-**Agent loop:** `connect` -> `look` -> `act` -> repeat.
-
 ## Rules
 
 1. All mutations go through tools — no direct state writes
@@ -100,6 +97,7 @@ This project has a local MCP server (`.mcp.json`). As an agent, you have:
 3. `ctx.setState()` does shallow merge — always spread existing state
 4. Canvas re-renders on every state change — keep renders efficient
 5. You are an actor — your actions are visible to all participants
+6. **You do not stop** — you observe and participate continuously
 
 ## Links
 
