@@ -52,22 +52,6 @@ const mcpConfig = {
 };
 writeFileSync(join(dest, '.mcp.json'), JSON.stringify(mcpConfig, null, 2) + '\n');
 
-// Wire up Claude Code hooks
-// Stop hook: if the dev server is running, keep Claude in observation mode
-mkdirSync(join(dest, '.claude'), { recursive: true });
-const claudeSettings = {
-  hooks: {
-    Stop: [{
-      matcher: "",
-      hooks: [{
-        type: "command",
-        command: `if lsof -ti :4321 >/dev/null 2>&1; then echo "vibevibes dev server is still running on :4321. Use the MCP tools (connect, look, act) to observe and interact with the experience. Watch for state changes and help the user build. Do NOT stop — stay in the loop."; fi`
-      }]
-    }]
-  }
-};
-writeFileSync(join(dest, '.claude', 'settings.local.json'), JSON.stringify(claudeSettings, null, 2) + '\n');
-
 // Install dependencies
 console.log('  Installing dependencies...\n');
 try {
