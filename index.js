@@ -67,7 +67,7 @@ console.log(`  Done! Next steps:
     npx vibevibes-serve .
 
   Docs:
-    SDK:       https://github.com/EgemennSahin/vibevibes
-    Runtime:   https://github.com/EgemennSahin/vibevibes-mcp
-    Examples:  https://github.com/EgemennSahin/experiences
+    SDK:       https://github.com/vibevibes/sdk
+    Runtime:   https://github.com/vibevibes/mcp
+    Examples:  https://github.com/vibevibes/experiences
 `);
