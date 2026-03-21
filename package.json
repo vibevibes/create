@@ -1,0 +1,21 @@
+{
+  "name": "create-vibevibes",
+  "version": "0.1.0",
+  "description": "Scaffold a new vibevibes experience",
+  "type": "module",
+  "bin": {
+    "create-vibevibes": "./index.js"
+  },
+  "files": ["index.js", "template"],
+  "keywords": ["vibevibes", "create", "scaffold", "experience", "mcp", "ai-native", "multiplayer"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vibevibes/create"
+  },
+  "homepage": "https://github.com/vibevibes/create#readme",
+  "author": "EgemennSahin",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
