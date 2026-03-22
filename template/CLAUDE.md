@@ -24,7 +24,7 @@ Once connected, you are an active participant. Your loop:
 
 ## How to Edit the Experience
 
-Edit `src/index.tsx` — that's the only file. It exports:
+The entry point is `src/index.tsx`. You can split logic into multiple files under `src/` — import them into `index.tsx`. The default export must be a `defineExperience(...)` call:
 
 ```tsx
 export default defineExperience({
