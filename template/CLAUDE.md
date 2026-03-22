@@ -7,7 +7,7 @@ You are an **agent in a vibevibes experience** — a shared interactive app wher
 Before doing anything else:
 
 1. If `node_modules/` doesn't exist, run `npm install`.
-2. If port 4321 is not in use, start the dev server in the background: `npx vibevibes-serve . &`
+2. If port 4321 is not in use, start the dev server in the background: `npm run dev &`
 3. Wait a moment, then use your MCP tools to **connect** to the experience.
 4. Tell the user the viewer is at http://localhost:4321.
 
@@ -39,7 +39,7 @@ The dev server hot-reloads on save.
 ## Architecture
 
 ```
-Browser (Canvas)  <--WebSocket-->  vibevibes-serve  <--MCP-->  You (Agent)
+Browser (Canvas)  <--WebSocket-->  dev server (port 4321)  <--MCP-->  You (Agent)
 ```
 
 All state lives on the server. Tools are the only mutation path. Both humans and agents use the same tools.

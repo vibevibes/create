@@ -45,7 +45,7 @@ const mcpConfig = {
   mcpServers: {
     vibevibes: {
       command: "npx",
-      args: ["@vibevibes/mcp"],
+      args: ["@vibevibes/mcp@latest"],
       env: { VIBEVIBES_SERVER_URL: "http://localhost:4321" },
     },
   },
