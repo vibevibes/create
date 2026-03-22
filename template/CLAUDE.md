@@ -34,7 +34,7 @@ export default defineExperience({
 });
 ```
 
-The dev server hot-reloads on save.
+The dev server hot-reloads on save — your edits appear instantly in the browser.
 
 ## Architecture
 
