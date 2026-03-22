@@ -1,6 +1,6 @@
 {
   "name": "@vibevibes/create",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Scaffold a new vibevibes experience",
   "type": "module",
   "bin": {
